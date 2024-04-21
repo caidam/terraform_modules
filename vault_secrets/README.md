@@ -15,10 +15,15 @@ module "vault_secrets" {
   source = "git::https://github.com/caidam/terraform_modules.git//vault_secrets"
 
   mount_path = "my_secrets" # Name of the kv store
-
-  data_json  = var.vault_secrets # Json file storing the secrets as key value pairs
-
+  
   token_ttl  = "768h" # The Time To Live period of the token, specified as a numeric string with suffix like '30s' or '5m'
+
+  # edit the data_json.tpl file and add the variables accordingly, you can create additional variables and use .tfvars to avoid hardcoding sensitive information
+  data_json = templatefile("${path.module}/data_json.tpl", {
+    secret_string   = "your-secret-string",
+    secret_number   = 99.99,
+    secret_var_json = var.vault_secrets
+  })
 }
 ~~~
 
@@ -62,6 +67,19 @@ vault_secrets = <<EOT
   "random_secret":  "your-random-secret"
 }
 EOT
+# add variables as needed
+~~~
+
+- data_json.tpl
+
+> Use a template `.tpl` file to populate your secrets in the data_json variable
+
+~~~tpl
+{
+  "secret_string": "${secret_string}",
+  "secret_number": ${secret_number},
+  "secret_var_json": ${secret_var_json}
+}
 ~~~
 
 ## Resources
