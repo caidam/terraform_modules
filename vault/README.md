@@ -12,10 +12,10 @@ This module manages a dedicated Key-Value (KV) store and associated policies in 
 
 ~~~hcl
 module "vault_secrets" {
-  source = "../modules/vault_secrets"
+  source = "git::https://github.com/caidam/terraform_modules.git//vault"
 
-  mount_path = "my_secrets"
-  data_json  = var.vault_secrets
+  mount_path = "my_secrets" # Name of the kv store
+  data_json  = var.vault_secrets # Json file storing the secrets as kay value pairs
 }
 ~~~
 
