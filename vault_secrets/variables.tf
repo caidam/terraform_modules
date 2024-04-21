@@ -12,5 +12,5 @@ variable "data_json" {
 variable "token_ttl" {
   description = "The Time To Live period of the token. This is specified as a numeric string with suffix like '30s' or '5m'"
   type        = string
-  default     = "768h"
+  # default     = "768h"
 }
