@@ -53,6 +53,8 @@ variable "vault_secrets" {
 - `.tfvars` : 
 
 ~~~hcl
+vault_address = "your-vault-address"
+vault_token   = "your-vault-token-with-necessary-permissions"
 vault_secrets = <<EOT
 {
   "access_key": "your-access-key",

@@ -13,8 +13,8 @@ resource "vault_policy" "dedicated" {
 
 # generate token for related to policy
 resource "vault_token" "dedicated" {
-  policies = [vault_policy.dedicated.name]
-  ttl      = var.token_ttl
+  policies  = [vault_policy.dedicated.name]
+  ttl       = var.token_ttl
   renewable = true
 }
 
