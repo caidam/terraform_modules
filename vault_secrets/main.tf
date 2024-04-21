@@ -14,7 +14,8 @@ resource "vault_policy" "dedicated" {
 # generate token for related to policy
 resource "vault_token" "dedicated" {
   policies = [vault_policy.dedicated.name]
-  ttl      = "768h"
+  ttl      = var.token_ttl
+  renewable = true
 }
 
 # store token and path in a .env file

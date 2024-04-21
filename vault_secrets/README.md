@@ -4,7 +4,7 @@ This module manages a dedicated Key-Value (KV) store and associated policies in 
 
 > The generated Vault token and mount point are written to a .env file.
 
-> The policy is read-only, meaning it only allows read operations on this specific KV store.
+> The token is renewable and is attached to a read-only policy, meaning it only allows read operations on this specific KV store.
 
 ## Usage
 
@@ -15,7 +15,10 @@ module "vault_secrets" {
   source = "git::https://github.com/caidam/terraform_modules.git//vault_secrets"
 
   mount_path = "my_secrets" # Name of the kv store
-  data_json  = var.vault_secrets # Json file storing the secrets as kay value pairs
+
+  data_json  = var.vault_secrets # Json file storing the secrets as key value pairs
+
+  token_ttl  = "768h" # The Time To Live period of the token, specified as a numeric string with suffix like '30s' or '5m'
 }
 ~~~
 
